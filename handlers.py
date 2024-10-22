@@ -20,8 +20,9 @@ async def get_weather(message: types.Message, state: FSMContext):
         await message.answer(
             f"Температура: {weather_data['main']['temp']}°C\n"
             f"Влажность: {weather_data['main']['humidity']}%\n"
-            f"Описание: {weather_data['weather'][0]['description']}"
+            f"Описание: {weather_data['weather'][0]['description']}\n\n"
+            "Введите название города для получения прогноза погоды."
         )
     else:
         await message.answer("Город не найден. Пожалуйста, попробуйте еще раз.")
-    await state.clear()
+    await state.set_state(Form.city)
